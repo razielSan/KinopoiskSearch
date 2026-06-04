@@ -10,12 +10,13 @@ from app.kinopoisk.backend.domain.exceptions import (
     ValidationAppError,
 )
 from domain.exceptions import AppException
+from domain.base_client import BaseClientInterface
 
 
 T = TypeVar("T", bound=pydantic.BaseModel)
 
 
-class BaseClient:
+class BaseClient(BaseClientInterface):
     logger = logging.getLogger(__name__)
 
     async def _get_data_by_url(

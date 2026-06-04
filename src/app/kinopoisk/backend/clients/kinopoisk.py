@@ -1,6 +1,7 @@
-from typing import Dict, Any
+from typing import Dict, Any, TypeVar, Type
 
 import httpx
+import pydantic
 
 from app.kinopoisk.backend.dto.external.kinopoisk import (
     DataKinopoiskModelTop250DTO,
@@ -25,6 +26,7 @@ class KinopoiskApiClient:
         self,
         page: int,
         url_path: str,
+        model: Type[DataKinopoiskModelTop250DTO],
     ) -> DataResponseModelDTO:
         response = await self.api_client._get_data_by_url(
             client=self.client,
@@ -39,9 +41,10 @@ class KinopoiskApiClient:
 
         validate_data: DataKinopoiskModelTop250DTO = self.api_client._validate_data(
             data=result_json,
-            model=DataKinopoiskModelTop250DTO,
+            model=model,
             path=url_path,
         )
+        validate_data
         movies = [
             ResponseModelDTO(
                 kinopoisk_id=movie.kinopoiskId,
@@ -58,7 +61,11 @@ class KinopoiskApiClient:
         )
 
     async def get_search_movie_by_name(
-        self, name: str, page: int, url_path: str
+        self,
+        name: str,
+        page: int,
+        url_path: str,
+        model: Type[DataKinopoiskModelSearchByNameDTO],
     ) -> DataResponseModelDTO:
         response = await self.api_client._get_data_by_url(
             client=self.client,
@@ -78,7 +85,7 @@ class KinopoiskApiClient:
         validate_data: DataKinopoiskModelSearchByNameDTO = (
             self.api_client._validate_data(
                 data=result_json,
-                model=DataKinopoiskModelSearchByNameDTO,
+                model=model,
                 path=url_path,
             )
         )
@@ -98,7 +105,10 @@ class KinopoiskApiClient:
         )
 
     async def get_info_movie(
-        self, film_id: int, url_path: str
+        self,
+        film_id: int,
+        url_path: str,
+        model: Type[KinopoiskModelInfoMovieDTO],
     ) -> ResponseModelInfoMovieDTO:
         response = await self.api_client._get_data_by_url(
             client=self.client,
@@ -115,7 +125,7 @@ class KinopoiskApiClient:
         )
         validate_data: KinopoiskModelInfoMovieDTO = self.api_client._validate_data(
             data=result_json,
-            model=KinopoiskModelInfoMovieDTO,
+            model=model,
             path=url_path,
         )
         result = ResponseModelInfoMovieDTO(

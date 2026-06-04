@@ -1,4 +1,4 @@
-from typing import Mapping, Dict
+from typing import Mapping
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -7,9 +7,17 @@ from app.kinopoisk.backend.settings.paths import BACKEND_DIR
 
 class KinopoiskSettings(BaseSettings):
     API_KEY: str
-    API_URL_TOP_250_MOVIES: str
-    API_URL_SEARCH_MOVIE_BY_NAME: str
-    API_URL_MOVIE_KINIOPOISK_ID: str
+    API_URL_TOP_250_MOVIES: str = (
+        "https://kinopoiskapiunofficial.tech"
+        "/api/v2.2/films/collections?type=TOP_250_MOVIES&page={page}"
+    )
+    API_URL_SEARCH_MOVIE_BY_NAME: str = (
+        "https://kinopoiskapiunofficial.tech"
+        "/api/v2.1/films/search-by-keyword?keyword={name}&page={page}"
+    )
+    API_URL_MOVIE_KINIOPOISK_ID: str = (
+        "https://kinopoiskapiunofficial.tech/api/v2.2/films/{id}"
+    )
 
     @property
     def headers(self) -> Mapping[str, str]:

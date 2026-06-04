@@ -20,6 +20,7 @@ dev = [
     "pycodestyle", 
     "pydocstyle",
     "mypy",
+    "pytest-cov",
 ]
 
 [tool.setuptools]
@@ -27,6 +28,18 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.coverage.run]
+source = [
+    "app",
+    "core",
+    "domain",
+]
+omit = [
+    "**/.mypy_cache/*",
+    "tests/*",
+    "**/__pycache__/*",
+]
 
 [project.scripts]
 app = "app.main:run"

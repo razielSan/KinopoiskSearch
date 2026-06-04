@@ -42,7 +42,7 @@ KinopoiskSearch/
 │   ├── app/                # Application layer
 │   ├── domain/             # Business logic
 │   ├── core/               # Shared utilities
-│   ├── setting/
+│   ├── settings/
 │   └── tests/
 │
 ├── tests/
@@ -102,6 +102,11 @@ API_KEY=YOUR_API_KEY
 ### ▶️ Run Application
 
 ```bash
+uvicorn app.main:app --reload
+```
+or
+
+```bash
 app
 ```
 
@@ -124,3 +129,5 @@ If you'd like to improve architecture, performance, or UX — feel free to open 
 ### 📬 Contact
 
 Telegram: @razielasus
+
+

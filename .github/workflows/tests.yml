@@ -27,5 +27,7 @@ jobs:
 
       
       - name: Unit tests
+        env:
+          API_KEY: test_key
         run: |
           pytest tests/unit

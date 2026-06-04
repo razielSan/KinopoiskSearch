@@ -1,4 +1,5 @@
-from typing import Mapping
+from typing import Mapping, Type
+from functools import lru_cache
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -29,4 +30,8 @@ class KinopoiskSettings(BaseSettings):
     model_config = SettingsConfigDict(env_file=BACKEND_DIR / ".env")
 
 
-settings: KinopoiskSettings = KinopoiskSettings()  # type: ignore[call-arg]
+@lru_cache
+def get_settings() -> KinopoiskSettings:
+    return KinopoiskSettings()  # type: ignore[call-arg]
+
+

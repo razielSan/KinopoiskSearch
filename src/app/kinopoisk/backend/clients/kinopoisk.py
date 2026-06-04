@@ -1,7 +1,6 @@
-from typing import Dict, Any, TypeVar, Type
+from typing import Dict, Any, Type
 
 import httpx
-import pydantic
 
 from app.kinopoisk.backend.dto.external.kinopoisk import (
     DataKinopoiskModelTop250DTO,
@@ -13,7 +12,7 @@ from app.kinopoisk.backend.dto.internal.movie import (
     ResponseModelDTO,
     ResponseModelInfoMovieDTO,
 )
-from app.kinopoisk.backend.settings.settings import settings as kinopoisk_settings
+from app.kinopoisk.backend.settings.settings import get_settings
 from app.kinopoisk.backend.clients.base import BaseClient
 
 
@@ -28,6 +27,7 @@ class KinopoiskApiClient:
         url_path: str,
         model: Type[DataKinopoiskModelTop250DTO],
     ) -> DataResponseModelDTO:
+        kinopoisk_settings = get_settings()
         response = await self.api_client._get_data_by_url(
             client=self.client,
             url=kinopoisk_settings.API_URL_TOP_250_MOVIES.format(page=page),
@@ -67,6 +67,7 @@ class KinopoiskApiClient:
         url_path: str,
         model: Type[DataKinopoiskModelSearchByNameDTO],
     ) -> DataResponseModelDTO:
+        kinopoisk_settings = get_settings()
         response = await self.api_client._get_data_by_url(
             client=self.client,
             url=kinopoisk_settings.API_URL_SEARCH_MOVIE_BY_NAME.format(
@@ -110,6 +111,7 @@ class KinopoiskApiClient:
         url_path: str,
         model: Type[KinopoiskModelInfoMovieDTO],
     ) -> ResponseModelInfoMovieDTO:
+        kinopoisk_settings = get_settings()
         response = await self.api_client._get_data_by_url(
             client=self.client,
             url=kinopoisk_settings.API_URL_MOVIE_KINIOPOISK_ID.format(

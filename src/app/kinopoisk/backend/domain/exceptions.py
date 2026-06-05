@@ -9,17 +9,17 @@ class ErrorsData(TypedDict):
 
 
 ERROR_HTTP_STATUS_CODES: Dict[int, ErrorsData] = {
+    401: {
+        "code": "INVALIDE_API_KEY",
+        "message": "the service is temporarily unavailable",
+    },
     500: {
         "code": "INTERNAL_SERVER_ERROR",
-        "message": "an unexpected failure has occurred",
+        "message": "an unexpected failure has occurred, try making the request again",
     },
     502: {
         "code": "BAD GATEWAY",
         "message": "invalid response",
-    },
-    503: {
-        "code": "SERVICE UNAVAILABLE",
-        "message": "the service is temporarily unavailable",
     },
 }
 
@@ -36,7 +36,7 @@ def get_error_details(status_code: int) -> ErrorsData:
         return data
     return {
         "code": "UNKNOWN STATUS CODE",
-        "message": "an unexpected error has occurred",
+        "message": "an unexpected error has occurred, try making the request again",
     }
 
 
@@ -45,5 +45,5 @@ class ValidationAppError(AppException):
         super().__init__(
             status_code=500,
             code="VALIDATION_ERROR",
-            message="failed_validate",
+            message="error on the server, try making the request again",
         )

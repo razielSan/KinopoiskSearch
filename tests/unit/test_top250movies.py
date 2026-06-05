@@ -9,7 +9,9 @@ from tests.base_clients import FakeBaseCleintTop250Movies
 @pytest.mark.unit
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    "total, total_pages, kinopoisk_id, name_ru, poster_url_preview, genres, rating_kinopoisk",
+    "total, total_pages, "
+    "kinopoisk_id, name_ru, "
+    "poster_url_preview, genres, rating_kinopoisk",
     [
         (
             1,

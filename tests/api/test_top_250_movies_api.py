@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 
 from app.kinopoisk.backend.core.startup import create_app
 
+
 @pytest.mark.api
 def test_top_250_movies_api():
     app = create_app()

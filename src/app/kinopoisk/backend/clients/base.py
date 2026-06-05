@@ -34,10 +34,12 @@ class BaseClient(BaseClientInterface):
             response.raise_for_status()
             return response
         except httpx.HTTPStatusError as error:
+            error_text = error.response.json() or error.response.text
             detail = get_error_details(status_code=error.response.status_code)
             self.logger.exception(
                 format_errors_message(
-                    message=f"{detail['message']}- {path}",
+                    message=f"\nsite message -{error_text} - {path}\nuser message -"
+                    f"{detail['code']} {detail['message']}",
                     name_function=self._get_data_by_url.__name__,
                 )
             )
@@ -58,7 +60,7 @@ class BaseClient(BaseClientInterface):
         except ValueError as err:
             self.logger.exception(
                 msg=format_errors_message(
-                    message=f"{err}- {path}",
+                    message=f"\n{err}- {path}",
                     name_function=self._get_data_by_url.__name__,
                 )
             )
@@ -76,7 +78,7 @@ class BaseClient(BaseClientInterface):
         except pydantic.ValidationError as err:
             self.logger.exception(
                 msg=format_errors_message(
-                    message=f"{err}- {path}",
+                    message=f"\n{err}- {path}",
                     name_function=self._get_data_by_url.__name__,
                 )
             )

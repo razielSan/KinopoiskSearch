@@ -10,7 +10,7 @@ from app.kinopoisk.backend.dto.internal.movie import (
 from app.kinopoisk.backend.dto.external.kinopoisk import (
     DataKinopoiskModelSearchByNameDTO,
     DataKinopoiskModelTop250DTO,
-    KinopoiskModelInfoMovieDTO
+    KinopoiskModelInfoMovieDTO,
 )
 from app.kinopoisk.backend.clients.kinopoisk import KinopoiskApiClient
 from app.kinopoisk.backend.clients.base import BaseClient
@@ -39,7 +39,7 @@ async def get_top_250_movies(
     return await kinopoisk_client.get_top_250_movies(
         page=page,
         url_path=f"{UrlPaths.API_TOP_250}?page={page}",
-        model=DataKinopoiskModelTop250DTO
+        model=DataKinopoiskModelTop250DTO,
     )
 
 

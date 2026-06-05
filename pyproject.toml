@@ -15,12 +15,13 @@ dependencies = [
 dev = [
     "pytest",
     "pytest-asyncio",
-    "black",
+    "pytest-cov",
     "flake8", 
+    "flake8-pyproject",
+    "black",
     "pycodestyle", 
     "pydocstyle",
     "mypy",
-    "pytest-cov",
 ]
 
 [tool.setuptools]
@@ -28,6 +29,13 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+
+[tool.black]
+line-length = 88
+
+[tool.flake8]
+max-line-length = 88
 
 [tool.coverage.run]
 source = [

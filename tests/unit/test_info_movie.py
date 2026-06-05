@@ -5,6 +5,7 @@ from app.kinopoisk.backend.dto.internal.movie import ResponseModelInfoMovieDTO
 from app.kinopoisk.backend.dto.external.kinopoisk import KinopoiskModelInfoMovieDTO
 from tests.base_clients import FakeBaseCleintInfoMovie
 
+
 @pytest.mark.unit
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
@@ -59,11 +60,12 @@ async def test_search_movies_by_name_success(
     assert result.site == web_url
     assert result.url_poster == poster_url_preview
 
+
 @pytest.mark.unit
 @pytest.mark.asyncio
 async def test_check_fields() -> None:
     name_en = "test_name_en"
-    
+
     genre1 = "test1"
     genre2 = "test2"
     genres = [{"genre": genre1}, {"genre": genre2}]

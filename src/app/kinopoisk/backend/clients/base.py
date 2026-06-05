@@ -38,15 +38,17 @@ class BaseClient(BaseClientInterface):
             detail = get_error_details(status_code=error.response.status_code)
             self.logger.exception(
                 format_errors_message(
-                    message=f"\nsite message -{error_text} - {path}\nuser message -"
-                    f"{detail['code']} {detail['message']}",
+                    message=f"\n[site message -{error_text}]\n[server message - "
+                    f"{detail['code']} - {detail['message']}]",
                     name_function=self._get_data_by_url.__name__,
+                    path=path,
                 )
             )
             raise AppException(
                 status_code=error.response.status_code,
                 code=detail["code"],
                 message=detail["message"],
+                user_message=detail["user_message"],
             )
 
     def _check_response(
@@ -60,8 +62,9 @@ class BaseClient(BaseClientInterface):
         except ValueError as err:
             self.logger.exception(
                 msg=format_errors_message(
-                    message=f"\n{err}- {path}",
+                    message=f"\n[{err}]",
                     name_function=self._get_data_by_url.__name__,
+                    path=path,
                 )
             )
             raise ValidationAppError()
@@ -78,8 +81,9 @@ class BaseClient(BaseClientInterface):
         except pydantic.ValidationError as err:
             self.logger.exception(
                 msg=format_errors_message(
-                    message=f"\n{err}- {path}",
+                    message=f"\n[{err}]",
                     name_function=self._get_data_by_url.__name__,
+                    path=path,
                 )
             )
             raise ValidationAppError()

@@ -2,6 +2,7 @@ import {
   API
 } from "./api.js";
 
+
 /**
  * 
  * @param {*} pageData 
@@ -19,15 +20,16 @@ async function showPaginationMovies(
 ) {
   let currentPage = 1;
   const quantityMovie = 20;
-/**
- * 
- * @param {object} data - содержит данные об общем количестве фильмов
- * @param {number} quantityMovie - количество фильмов на странице
- */
+  /**
+   * 
+   * @param {object} data - содержит данные об общем количестве фильмов
+   * @param {number} quantityMovie - количество фильмов на странице
+   */
   async function displayPagination(data, quantityMovie) {
     const countMovies = data.total;
     const paginationEl = document.querySelector(".pagination");
-    const pagesCount = Math.ceil(countMovies / quantityMovie);
+    let pagesCount = Math.ceil(countMovies / quantityMovie);
+    pagesCount = pagesCount <= 20 ? pagesCount : 20;
     const ulEl = document.createElement("ul");
     ulEl.classList.add("pagination__list");
     for (let i = 0; i < pagesCount; i++) {

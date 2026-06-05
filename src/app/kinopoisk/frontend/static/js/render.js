@@ -1,3 +1,6 @@
+import { showErrors } from "./domain/errors.js";
+
+
 /**
  * @param {object} data - Данные с запроса
  * @param {function} openModal - Функция для отображения модального окна
@@ -5,10 +8,13 @@
 async function showMovies(data, openModal) {
   // Отрисовывает изображения фильмов на экране
 
+  if (!data.movies) { // Если произошла ошибка
+    showErrors(data.message);
+    return;
+}
 
   // оцищаем предыдущие фильмы
   document.querySelector(".movies").innerHTML = "";
-
 
   let movieData = data.movies;
   const moviesEl = document.querySelector(".movies");

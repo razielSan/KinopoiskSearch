@@ -23,6 +23,7 @@ function show_search_movie_by_name(
         if (search.value) {
             document.querySelector(".pagination").innerHTML = "";
             const dataSearch = await getListMovies(apiSearchUrl);
+            console.log(dataSearch, 1111)
             if (!dataSearch.movies) { // Если произошла ошибка
                 showErrors(dataSearch.message);
                 return;

@@ -15,5 +15,5 @@ def register_exceptions(
     ) -> StarletteJsonResponse:
         return JSONResponse(
             status_code=exc.status_code,
-            content={"code": exc.code, "message": exc.message},
+            content={"code": exc.code, "message": exc.user_message},
         )

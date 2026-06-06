@@ -27,7 +27,7 @@ class KinopoiskSettings(BaseSettings):
             "X-API-KEY": self.API_KEY,
         }
 
-    model_config: SettingsConfigDict = SettingsConfigDict(env_file=BACKEND_DIR / ".env")
+    model_config = SettingsConfigDict(env_file=BACKEND_DIR / ".env")
 
 
 @lru_cache

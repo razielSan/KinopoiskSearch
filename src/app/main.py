@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from app.kinopoisk.backend.core.startup import create_app
 from app.settings import settings as app_settings
 
+data = 1
 
 app: FastAPI = create_app()
 

@@ -23,7 +23,6 @@ dev = [
     "pydocstyle",
     "mypy",
     "pre-commit==3.5.0",
-    "ruff==0.3.0",
 ]
 
 [tool.setuptools]

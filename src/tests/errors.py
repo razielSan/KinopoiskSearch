@@ -4,7 +4,6 @@ from app.kinopoisk.backend.domain.exceptions import ValidationAppError
 from domain.exceptions import AppException
 from domain.base_client import BaseClientInterface
 
-
 class FakeHttp500ClientErrors(BaseClientInterface):
     async def _get_data_by_url(
         self, client: Any, url: str, headers: Dict[str, str], path: str
